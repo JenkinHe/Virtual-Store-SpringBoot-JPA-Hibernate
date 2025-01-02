@@ -37,6 +37,10 @@ public class ProductService {
 		productRepo.deleteById(id);
 	}
 	
+	public Product findByProductName(String name) {
+		return productRepo.findByName(name);
+	}
+	
 
 	
 

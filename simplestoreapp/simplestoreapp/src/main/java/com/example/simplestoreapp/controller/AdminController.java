@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.simplestoreapp.entity.Admin;
 import com.example.simplestoreapp.entity.Order;
+import com.example.simplestoreapp.entity.Product;
 import com.example.simplestoreapp.entity.User;
 import com.example.simplestoreapp.service.AdminService;
 import com.example.simplestoreapp.service.OrderService;
@@ -104,6 +105,21 @@ public class AdminController {
 		
 	}
 	
+	@GetMapping("/product/search")
+	public String productSearch(String name,Model model) {
+		Product product= productService.findByProductName(name);
+		if(product!=null) {
+			model.addAttribute("ordersList",orderService.findOrdersByUser(user));
+			model.addAttribute("Product",product);
+			
+			return "ProductPage";
+			
+		}
+		model.addAttribute("error","Sorry, Product was not found...");
+		model.addAttribute("ordersList",orderService.findOrdersByUser(user));
+		
+		return "ProductPage";
+	}
 	
 	@GetMapping("/place/order")
 	public String placeOrder(Order order,Model model) {
