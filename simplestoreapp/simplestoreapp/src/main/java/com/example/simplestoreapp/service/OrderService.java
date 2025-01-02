@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.simplestoreapp.entity.Order;
+import com.example.simplestoreapp.entity.User;
 import com.example.simplestoreapp.repo.OrderRepo;
 import com.example.simplestoreapp.repo.OrderRepo;
 
@@ -35,6 +36,10 @@ public class OrderService {
 	public void deleteOrder(Long id) {
 		orderRepo.findById(id).orElseThrow(()->new RuntimeException("Admin with id "+id+" not found"));
 		orderRepo.deleteById(id);
+	}
+	
+	public List<Order> findOrdersByUser(User user){
+		return orderRepo.findByUser(user);
 	}
 	
 

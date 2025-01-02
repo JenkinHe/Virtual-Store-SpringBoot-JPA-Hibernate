@@ -36,6 +36,10 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
+	public User findUserByEmail(String email) {
+		return userRepo.findByEmail(email);
+	}
+	
 	public boolean verifyCredentials(String email, String password) {
 		User user =userRepo.findByEmail(email);
 		if(user.getPassword()==password) {
